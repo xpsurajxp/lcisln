@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Lakshya Computer Institute - Computer Fundamentals Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" type="image/png" href="img/fevicon.png">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #6045ea;
+      --secondary: #854fee;
+      --accent: #ee46a6;
+      --light: #f2f2f2;
+      --dark: #22223b;
+      --neutral: #d9d4e7;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--light);
+    }
+
+    header {
+      background: var(--primary);
+      color: #fff;
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(60, 30, 100, 0.03);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 30px 40px 30px;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo-img {
+      height: 38px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      margin-right: 10px;
+      display: block;
+      object-fit: contain;
+      background: none;
+      border-radius: 0;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      position: relative;
+      user-select: none;
+    }
+
+    .nav-menu a,
+    .dropdown-btn {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px 10px;
+      transition: background 0.2s;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    .nav-menu a:hover,
+    .dropdown-btn:hover {
+      background: var(--accent);
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      z-index: 100;
+    }
+
+    .dropdown-btn {
+      padding-right: 18px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 130%;
+      left: 0;
+      background: #fff;
+      min-width: 180px;
+      box-shadow: 0 8px 16px rgba(96, 69, 234, 0.15);
+      z-index: 99;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+      animation: dropdown-in 0.25s;
+      transition: opacity 0.3s ease;
+    }
+
+    @keyframes dropdown-in {
+      from {
+        transform: translateY(-15px);
+        opacity: 0
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1
+      }
+    }
+
+    .dropdown-content a {
+      color: var(--primary);
+      background: #fff;
+      padding: 13px 20px;
+      text-decoration: none;
+      display: block;
+      font-weight: 500;
+      border-bottom: 1px solid var(--neutral);
+      transition: background 0.18s;
+    }
+
+    .dropdown-content a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-content a:hover {
+      background: var(--neutral);
+      color: var(--accent);
+    }
+
+    .dropdown.open .dropdown-content {
+      display: block;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .btn-register {
+      display: inline-block;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 1.07rem;
+      letter-spacing: 0.02em;
+      padding: 8px 26px;
+      border-radius: 30px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      color: #fff;
+      background: linear-gradient(100deg, var(--accent), var(--secondary));
+      box-shadow: 0 4px 24px var(--accent)13;
+      transition: background 0.20s, color 0.18s, box-shadow 0.18s, transform 0.13s;
+    }
+
+    .btn-register:hover {
+      background: linear-gradient(100deg, var(--secondary), var(--accent));
+      color: #fff;
+      transform: scale(1.05) translateY(-2px);
+    }
+
+    .notes-layout {
+      display: flex;
+      gap: 38px;
+      margin-top: 44px;
+      min-height: 500px;
+    }
+
+    aside.sidebar {
+      background: var(--secondary);
+      color: #fff;
+      border-radius: 14px;
+      min-width: 240px;
+      max-width: 260px;
+      padding: 30px 0 30px 0;
+      box-shadow: 0 2px 20px var(--primary)15;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: fit-content;
+    }
+
+    .sidebar-title {
+      font-size: 1.28rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .sidebar-links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .sidebar-links a {
+      width: 80%;
+      text-align: center;
+      color: #fff;
+      padding: 10px 12px;
+      margin: 0;
+      font-size: 1rem;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: background 0.18s, color 0.18s;
+      background: transparent;
+    }
+
+    .sidebar-links a.active,
+    .sidebar-links a:hover {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    section.notes-section {
+      background: #fff;
+      border-radius: 14px;
+      padding: 36px 38px;
+      flex: 1 1 720px;
+      box-shadow: 0 0 20px var(--neutral);
+      color: var(--dark);
+      animation: fadeInUp 1s;
+    }
+
+    .notes-section h1 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 22px;
+    }
+
+    .notes-section h2 {
+      font-size: 1.2rem;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 13px;
+      margin-top: 45px;
+    }
+
+    .notes-section p,
+    .notes-section ul {
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: var(--dark);
+      margin-bottom: 20px;
+      margin-top: 0;
+    }
+
+    .notes-section ul {
+      padding-left: 22px;
+    }
+
+    footer {
+      background: var(--primary);
+      color: #fff;
+      padding: 20px 15px 40px 15px;
+      text-align: center;
+      margin-top: 60px;
+      border-radius: 20px 20px 0 0;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    footer strong {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    footer p {
+      margin: 0 0 12px 0;
+    }
+
+    footer>div {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    footer>div>div {
+      color: #d5cfff;
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+
+    footer .social-media {
+      font-size: 1.6rem;
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      color: #dcd4ffcc;
+    }
+
+    footer .social-media a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    footer .social-media a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        padding: 0 10px;
+      }
+
+      .notes-layout {
+        gap: 13px;
+      }
+
+      section.notes-section {
+        padding: 22px 10px;
+      }
+
+      aside.sidebar {
+        min-width: 170px;
+        max-width: 95vw;
+        padding: 16px 0;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .notes-layout {
+        flex-direction: column;
+      }
+
+      aside.sidebar {
+        width: 97%;
+        margin: 0 auto 24px auto;
+      }
+
+      section.notes-section {
+        width: 99%;
+      }
+
+      .nav-menu,
+      .nav-right {
+        gap: 10px;
+      }
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header>
+    <div class="container navbar">
+      <div class="nav-left">
+        <img src="img/logo.png" alt="Lakshya Logo" class="logo-img" />
+        <nav class="nav-menu" id="navMenu">
+          <a href="index.html">Home</a>
+          <div class="dropdown" id="courseDropdown">
+            <button class="dropdown-btn" id="dropdownBtn">Course ▼</button>
+            <div class="dropdown-content" id="dropdownContent">
+              <a href="Course.html">Basic Course</a>
+              <a href="Course.html">Intermediate Course</a>
+              <a href="Course.html">Advance Course</a>
+            </div>
+          </div>
+          <a href="admission.html">Admission</a>
+          <a href="courses.html">Courses</a>
+          <a href="notebook.html">Notebook</a>
+          <a href="contact.html">Contact us</a>
+        </nav>
+      </div>
+      <div class="nav-right">
+        <a href="register.html" class="btn-register">Register</a>
+
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="notes-layout">
+      <aside class="sidebar">
+        <div class="sidebar-title">Course Sections</div>
+        <div class="sidebar-links">
+          <a href="notebook-fundamentals.html" class="active">Computer Fundamentals</a>
+          <a href="#">ADCA Plus</a>
+          <a href="#">DCA</a>
+          <a href="#">DFA</a>
+          <a href="#">ADFA</a>
+          <a href="#">CCC</a>
+          <a href="#">O-Level</a>
+          <a href="#">Advance Excel</a>
+          <a href="#">Graphics Designing</a>
+          <a href="#">Web Designing</a>
+          <a href="#">Digital Marketing</a>
+          <a href="#">Video Editing</a>
+          <a href="#">Animation and VFX</a>
+        </div>
+      </aside>
+      <section class="notes-section">
+        <h1>Computer Fundamentals</h1>
+        <h2>Introduction</h2>
+        <p>
+          Computer Fundamentals is the study of basic structure, operations and functions of computer systems. A
+          computer is an electronic machine that processes data, performs calculations, and solves problems at high
+          speed and accuracy.
+        </p>
+        <h2>Definition of Computer</h2>
+        <p>
+          Computer is an electronic device that accepts data (input), processes it according to instructions (process),
+          and gives the result (output). <br>
+          <strong>IPO Cycle:</strong> Input &rarr; Processing &rarr; Output
+        </p>
+        <h2>Main Components of Computer</h2>
+        <ul>
+          <li>Input Unit (e.g. keyboard, mouse, scanner)</li>
+          <li>Output Unit (e.g. monitor, printer, speaker)</li>
+          <li>CPU (Central Processing Unit)</li>
+          <li>Memory Unit (RAM and ROM)</li>
+        </ul>
+        <h2>Basic Terms</h2>
+        <ul>
+          <li><strong>Hardware:</strong> Physical parts - monitor, keyboard, CPU, printer</li>
+          <li><strong>Software:</strong> Programs and applications - Windows, MS Word, Photoshop</li>
+          <li><strong>Data:</strong> Raw facts and figures that are processed by the computer</li>
+          <li><strong>Information:</strong> Processed data which has meaning and is useful</li>
+        </ul>
+        <h2>Uses of Computers</h2>
+        <ul>
+          <li>Education</li>
+          <li>Business</li>
+          <li>Banking</li>
+          <li>Health Care</li>
+          <li>Designing &amp; Animation</li>
+          <li>Research</li>
+        </ul>
+        <h2>Generations of Computers</h2>
+        <p>
+          Computers have evolved in generations: <br>
+          <strong>1st Generation:</strong> Vacuum Tubes <br>
+          <strong>2nd Generation:</strong> Transistors <br>
+          <strong>3rd Generation:</strong> Integrated Circuits <br>
+          <strong>4th Generation:</strong> Microprocessors <br>
+          <strong>5th Generation:</strong> Artificial Intelligence (AI)
+        </p>
+        <h2>Important Points</h2>
+        <ul>
+          <li>Computers are reliable, fast and accurate.</li>
+          <li>They do not have intelligence or emotions, only process instructions.</li>
+          <li>Require electricity, input and instructions to operate.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <strong>Lakshya Computer Institute</strong>
+      <p>Empowering Digital India | © 2025 All Rights Reserved</p>
+      <div style="color: #d5cfff; font-style: italic; margin-bottom: 15px;">
+        Contact: lcisln01@gmail.com &bull; Near SBI Bank Kurebhar Sultanpur Road
+      </div>
+      <div class="social-media" aria-label="Social Media Links">
+        <a href="https://facebook.com/lakshyacomputer" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa fa-facebook"></i>
+        </a>
+        <a href="https://twitter.com/lakshyainstitute" target="_blank" rel="noopener" aria-label="Twitter">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a href="https://instagram.com/lakshyacomputer" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Header dropdown
+    const dropdown = document.getElementById('courseDropdown');
+    const dropdownBtn = document.getElementById('dropdownBtn');
+    const dropdownContent = document.getElementById('dropdownContent');
+    let dropdownTimeout;
+    function openDropdown() {
+      clearTimeout(dropdownTimeout);
+      dropdown.classList.add('open');
+    }
+    function closeDropdown() {
+      dropdownTimeout = setTimeout(() => {
+        dropdown.classList.remove('open');
+      }, 250);
+    }
+    dropdownBtn.addEventListener('mouseenter', openDropdown);
+    dropdownBtn.addEventListener('mouseleave', closeDropdown);
+    dropdownContent.addEventListener('mouseenter', openDropdown);
+    dropdownContent.addEventListener('mouseleave', closeDropdown);
+    // Search functionality
+    document.getElementById("searchForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      let query = document.getElementById("searchInput").value.trim();
+      if (query) {
+        alert("Search query: " + query);
+      } else {
+        alert("Please enter search text");
+      }
+    });
+    // Highlight active sidebar link (basic demo)
+    document.querySelectorAll('.sidebar-links a').forEach(link => {
+      link.addEventListener('click', function (e) {
+        document.querySelectorAll('.sidebar-links a').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
