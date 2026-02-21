@@ -60,10 +60,10 @@
     --text-secondary: #94a3b8;
     /* Slate 400 */
 
-    --primary-color: #020617;
-    /* Slate 950 */
-    --primary-hover: #0f172a;
-    /* Slate 900 */
+    --primary-color: #f8fafc;
+    /* Slate 50 (White for text) */
+    --primary-hover: #e2e8f0;
+    /* Slate 200 */
 
     --accent-color: #3b82f6;
     /* Trust Blue 500 */
@@ -272,7 +272,7 @@ img {
 }
 
 body[data-theme='dark'] .toggle-track {
-    background-color: var(--primary-hover);
+    background-color: var(--accent-color);
 }
 
 .icon-sun {
@@ -304,7 +304,7 @@ body[data-theme='dark'] .toggle-track {
 
 body[data-theme='dark'] .toggle-thumb {
     transform: translateX(30px);
-    background-color: var(--primary-color);
+    background-color: #ffffff;
 }
 
 .btn-outline {
@@ -1018,5 +1018,56 @@ footer {
 
     .contact-card {
         padding: 24px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .card {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .section-padding {
+        padding: 40px 0;
+    }
+
+    .stat-number {
+        font-size: 2.2rem;
+    }
+
+    .navbar {
+        height: 70px;
+    }
+
+    .nav-brand h3 {
+        font-size: 1.2rem;
+    }
+
+    .logo-img {
+        height: 36px;
+    }
+
+    .toggle-track {
+        width: 50px;
+        height: 26px;
+    }
+
+    body[data-theme='dark'] .toggle-thumb {
+        transform: translateX(24px);
+    }
+
+    .toggle-thumb {
+        width: 20px;
+        height: 20px;
     }
 }
