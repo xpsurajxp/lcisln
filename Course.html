@@ -3,519 +3,433 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>Courses</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
+  <title>Courses - Lakshya Computer Institute</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="img/fevicon.png">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
-    :root {
-      --primary: #6045ea;
-      --secondary: #854fee;
-      --accent: #ee46a6;
-      --light: #f2f2f2;
-      --dark: #22223b;
-      --neutral: #d9d4e7;
+    /* Course Specific Styles */
+    .search-filter {
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+      position: relative;
     }
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: var(--light);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 30px 40px 30px;
-    }
-
-    header {
-      background: var(--primary);
-      color: #fff;
+    .search-filter input {
       width: 100%;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 8px rgba(60, 30, 100, 0.03);
-    }
-
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 0;
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .logo-img {
-      height: 38px;
-      width: auto;
-      filter: brightness(0) invert(1);
-      margin-right: 10px;
-      display: block;
-      object-fit: contain;
-      background: none;
-      border-radius: 0;
-    }
-
-    .nav-menu {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      position: relative;
-      user-select: none;
-    }
-
-    .nav-menu a,
-    .dropdown-btn {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1.05rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px 10px;
-      transition: background 0.2s;
-      border-radius: 6px;
-      outline: none;
-    }
-
-    .nav-menu a:hover,
-    .dropdown-btn:hover {
-      background: var(--accent);
-    }
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-      z-index: 100;
-    }
-
-    .dropdown-btn {
-      padding-right: 18px;
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 130%;
-      left: 0;
-      background: #fff;
-      min-width: 180px;
-      box-shadow: 0 8px 16px rgba(96, 69, 234, 0.15);
-      z-index: 99;
-      border-radius: 0 0 10px 10px;
-      overflow: hidden;
-      animation: dropdown-in 0.25s;
-      transition: opacity 0.3s ease;
-    }
-
-    @keyframes dropdown-in {
-      from {
-        transform: translateY(-15px);
-        opacity: 0
-      }
-
-      to {
-        transform: translateY(0);
-        opacity: 1
-      }
-    }
-
-    .dropdown-content a {
-      color: var(--primary);
-      background: #fff;
-      padding: 13px 20px;
-      text-decoration: none;
-      display: block;
-      font-weight: 500;
-      border-bottom: 1px solid var(--neutral);
-      transition: background 0.18s;
-    }
-
-    .dropdown-content a:last-child {
-      border-bottom: none;
-    }
-
-    .dropdown-content a:hover {
-      background: var(--neutral);
-      color: var(--accent);
-    }
-
-    .dropdown.open .dropdown-content {
-      display: block;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .btn-register {
-      display: inline-block;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 1.07rem;
-      letter-spacing: 0.02em;
-      padding: 8px 26px;
+      padding: 16px 24px 16px 50px;
       border-radius: 30px;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
+      border: 2px solid var(--border-color);
+      font-size: 1.1rem;
+      background-color: var(--surface-color);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-normal);
+    }
+
+    .search-filter input:focus {
       outline: none;
-      color: #fff;
-      background: linear-gradient(100deg, var(--accent), var(--secondary));
-      box-shadow: 0 4px 24px var(--accent)13;
-      transition: background 0.20s, color 0.18s, box-shadow 0.18s, transform 0.13s;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
     }
 
-    .btn-register:hover {
-      background: linear-gradient(100deg, var(--secondary), var(--accent));
-      color: #fff;
-      transform: scale(1.05) translateY(-2px);
-    }
-
-    .hero-section {
-      background: linear-gradient(100deg, var(--secondary) 50%, var(--accent) 100%);
-      padding: 55px 0 34px 0;
-      text-align: center;
-      color: #fff;
-    }
-
-    .hero-section h1 {
-      font-size: 2.7rem;
-      margin-top: 0;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .courses-list-section {
-      background: #fff;
-      margin-top: 35px;
-      border-radius: 14px;
-      box-shadow: 0 2px 24px 0 #6045ea13;
-      padding: 44px 10px 36px 10px;
-      animation: fadeInUp 0.7s;
-    }
-
-    .courses-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 28px;
-      margin-bottom: 34px;
+    .search-filter i {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-size: 1.2rem;
     }
 
     .course-card {
-      flex: 1 1 320px;
-      max-width: 340px;
-      background: var(--neutral);
-      border-radius: 13px;
-      padding: 30px 20px 20px 20px;
-      box-shadow: 0 8px 30px var(--primary)08;
-      margin-bottom: 6px;
-      transition: transform 0.24s, box-shadow 0.24s;
-      animation: cardIn 0.7s;
+      align-items: flex-start;
+      height: 100%;
+    }
+
+    .course-meta {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      border: 2px solid transparent;
-      cursor: pointer;
+      gap: 12px;
+      margin-top: auto;
+      width: 100%;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
     }
 
-    .course-card:hover {
-      background: #fff;
-      box-shadow: 0 15px 40px var(--accent)18;
-      border-color: var(--accent);
-      transform: scale(1.04) translateY(-8px);
-    }
-
-    .course-card h3 {
-      font-size: 1.23rem;
-      font-weight: 700;
-      color: var(--secondary);
-      margin: 0 0 16px 0;
-    }
-
-    .course-card p {
-      font-size: 1.01rem;
-      color: var(--dark);
-      margin: 0 0 8px 0;
-      font-weight: 500;
-    }
-
-    .syllabus-btn {
-      display: block;
-      margin: 40px auto 0 auto;
-      padding: 15px 60px;
-      font-size: 1.16rem;
-      color: #fff;
-      background: var(--primary);
-      border: none;
-      border-radius: 35px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.23s;
-      box-shadow: 0 2px 16px var(--secondary)11;
-      letter-spacing: 1px;
-    }
-
-    .syllabus-btn:hover {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    footer {
-      background: var(--primary);
-      color: #fff;
-      padding: 20px 15px 40px 15px;
-      text-align: center;
-      margin-top: 60px;
-      border-radius: 20px 20px 0 0;
-      font-size: 1rem;
-      letter-spacing: 0.5px;
-    }
-
-    footer strong {
-      display: block;
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-    }
-
-    footer p {
-      margin: 0 0 12px 0;
-    }
-
-    footer>div {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    footer>div>div {
-      color: #d5cfff;
-      font-style: italic;
-      margin-bottom: 15px;
-    }
-
-    footer .social-media {
-      font-size: 1.6rem;
+    .meta-item {
       display: flex;
-      justify-content: center;
-      gap: 32px;
-      color: #dcd4ffcc;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      color: var(--text-secondary);
     }
 
-    footer .social-media a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.3s;
+    .meta-item span:last-child {
+      color: var(--primary-color);
+      font-weight: 700;
     }
 
-    footer .social-media a:hover {
-      color: var(--accent);
-    }
-
-    @media (max-width: 900px) {
-      .container {
-        padding: 0 10px;
-      }
-
-      .courses-row {
-        gap: 12px;
-      }
-
-      .syllabus-btn {
-        padding: 12px 25px;
-        font-size: 1.08rem;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .courses-row {
-        flex-wrap: wrap;
-      }
-
-      .course-card {
-        max-width: 97%;
-      }
-
-      .nav-menu,
-      .nav-right {
-        gap: 10px;
-      }
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      display: none;
+      width: 100%;
+      grid-column: 1 / -1;
     }
   </style>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+  <!-- Page Loader -->
+  <div id="page-loader" class="page-loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Header -->
   <header>
     <div class="container navbar">
-      <div class="nav-left">
-        <img src="img/logo.png" alt="Lakshya Logo" class="logo-img" />
-        <nav class="nav-menu" id="navMenu">
-          <a href="index.html">Home</a>
-          <div class="dropdown" id="courseDropdown">
-            <button class="dropdown-btn" id="dropdownBtn">Course ▼</button>
-            <div class="dropdown-content" id="dropdownContent">
-              <a href="Course.html">Basic Course</a>
-              <a href="Course.html">Intermediate Course</a>
-              <a href="Course.html">Advance Course</a>
-            </div>
-          </div>
-          <a href="admission.html">Admission</a>
-          <a href="Notebook.html">Notebook</a>
-          <a href="contact.html">Contact us</a>
-        </nav>
+      <div class="nav-brand">
+        <a href="index.html">
+          <img src="img/logo.png" alt="Lakshya Logo" class="logo-img" />
+        </a>
       </div>
-      <div class="nav-right">
-        <a href="register.html" class="btn-register">Register</a>
 
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <div class="dropdown">
+          <a href="#" class="nav-link dropdown-toggle active" id="dropdownBtn">Course <i
+              class="fas fa-chevron-down"></i></a>
+          <div class="dropdown-menu">
+            <a href="Course.html" class="dropdown-item">Basic Course</a>
+            <a href="Course.html" class="dropdown-item">Intermediate Course</a>
+            <a href="Course.html" class="dropdown-item">Advance Course</a>
+          </div>
+        </div>
+        <a href="admission.html" class="nav-link">Admission</a>
+        <a href="Notebook.html" class="nav-link">Notebook</a>
+        <a href="contact.html" class="nav-link">Contact us</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="btn btn-cta" style="display: flex; align-items: center; gap: 8px;"
+          aria-label="Toggle Dark Mode">
+          <i class="fas fa-moon"></i> Dark Mode
+        </button>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle Mobile Menu">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
     </div>
   </header>
 
-  <section class="hero-section">
-    <h1>Our Courses</h1>
+  <!-- Hero Banner -->
+  <section class="hero"
+    style="padding: 60px 0; text-align: center; background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: #fff;">
+    <div class="container">
+      <h1 style="color: #fff; margin-bottom: 0;">Our Courses</h1>
+      <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; margin-top: 16px;">Find the perfect course to kickstart
+        your career.</p>
+    </div>
   </section>
 
-  <main>
-    <section class="container courses-list-section">
-      <div class="courses-row">
-        <div class="course-card">
-          <h3>ADCA Plus</h3>
-          <p>Duration: 15 Months</p>
-          <p>Amount: ₹8,500/-</p>
-        </div>
-        <div class="course-card">
-          <h3>ADCA</h3>
-          <p>Duration: 12 Months</p>
-          <p>Amount: ₹6,500/-</p>
-        </div>
-        <div class="course-card">
-          <h3>DCA</h3>
-          <p>Duration: 6 Months</p>
-          <p>Amount: ₹3,500/-</p>
-        </div>
-      </div>
-      <div class="courses-row">
-        <div class="course-card">
-          <h3>DFA</h3>
-          <p>Duration: 6 Months</p>
-          <p>Amount: ₹3,500/-</p>
-        </div>
-        <div class="course-card">
-          <h3>CCC</h3>
-          <p>Duration: 3 Months</p>
-          <p>Amount: ₹3,000/-</p>
-        </div>
-        <div class="course-card">
-          <h3>O-Level</h3>
-          <p>Duration: 1 Year</p>
-          <p>Amount: ₹15,500/-</p>
-        </div>
-      </div>
-      <div class="courses-row">
-        <div class="course-card">
-          <h3>Advance Excel</h3>
-          <p>Duration: 3 Months</p>
-          <p>Amount: ₹3,000/-</p>
-        </div>
-        <div class="course-card">
-          <h3>Graphics Designing</h3>
-          <p>Duration: 6 Months</p>
-          <p>Amount: ₹8,500/-</p>
-        </div>
-        <div class="course-card">
-          <h3>Web Designing</h3>
-          <p>Duration: 6 Months</p>
-          <p>Amount: ₹8,500/-</p>
-        </div>
-      </div>
-      <div class="courses-row">
-        <div class="course-card">
-          <h3>ADFA</h3>
-          <p>Duration: 12 Months</p>
-          <p>Amount: ₹7,000/-</p>
-        </div>
-        <div class="course-card">
-          <h3>Video Editing</h3>
-          <p>Duration: 6 Months</p>
-          <p>Amount: ₹16,500/-</p>
-        </div>
-        <div class="course-card">
-          <h3>Animation and VFX</h3>
-          <p>Duration: 2 Year</p>
-          <p>Amount: ₹60,000/-</p>
-        </div>
-      </div>
-      <a href="#" target="_parent" style="text-decoration: none;"><button class="syllabus-btn">Explore
-          Syllabus</button></a>
-    </section>
-  </main>
+  <!-- Courses List Section -->
+  <section class="section-padding">
+    <div class="container">
 
+      <!-- Search Filter -->
+      <div class="search-filter reveal">
+        <i class="fas fa-search"></i>
+        <input type="text" id="courseSearch" placeholder="Search courses by name or duration...">
+      </div>
+
+      <div class="grid-3" id="courseGrid">
+        <!-- Result empty state -->
+        <div class="no-results" id="noResultsMsg">No courses found matching your search.</div>
+
+        <!-- Course 1 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">ADCA Plus</h3>
+          <p class="card-desc">Advanced Diploma in Computer Application Plus.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>15 Months</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹8,500/-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 2 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">ADCA</h3>
+          <p class="card-desc">Advanced Diploma in Computer Application.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>12 Months</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹6,500/-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 3 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">DCA</h3>
+          <p class="card-desc">Diploma in Computer Application.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>6 Months</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹3,500/-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 4 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">DFA</h3>
+          <p class="card-desc">Diploma in Financial Accounting.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>6 Months</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹3,500/-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 5 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">CCC</h3>
+          <p class="card-desc">Course on Computer Concepts.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>3 Months</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹3,000/-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 6 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">O-Level</h3>
+          <p class="card-desc">NIELIT O-Level Certification.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>1 Year</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹15,500/-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 7 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">Advance Excel</h3>
+          <p class="card-desc">Master MS Excel formulas, functions, and data analysis.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>3 Months</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹3,000/-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 8 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">Graphics Designing</h3>
+          <p class="card-desc">Learn Photoshop, CorelDraw, and digital design.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>6 Months</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹8,500/-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 9 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">Web Designing</h3>
+          <p class="card-desc">Learn HTML, CSS, JavaScript and responsive design.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>6 Months</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹8,500/-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 10 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">ADFA</h3>
+          <p class="card-desc">Advanced Diploma in Financial Accounting.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>12 Months</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹7,000/-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 11 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">Video Editing</h3>
+          <p class="card-desc">Professional video editing with Premiere Pro and After Effects.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>6 Months</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹16,500/-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Course 12 -->
+        <div class="card course-card reveal">
+          <h3 class="card-title">Animation and VFX</h3>
+          <p class="card-desc">Comprehensive training in 2D/3D animation and visual effects.</p>
+          <div class="course-meta">
+            <div class="meta-item">
+              <span><i class="far fa-clock"></i> Duration</span>
+              <span>2 Year</span>
+            </div>
+            <div class="meta-item">
+              <span><i class="fas fa-rupee-sign"></i> Amount</span>
+              <span>₹60,000/-</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center" style="margin-top: 50px;">
+        <button class="btn btn-primary"
+          onclick="alert('Syllabus downloading functionality will be available soon.')">Explore Syllabus</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <div>
-      <strong>Lakshya Computer Institute</strong>
-      <p>Empowering Digital India | © 2025 All Rights Reserved</p>
-      <div style="color: #d5cfff; font-style: italic; margin-bottom: 15px;">
-        Contact: lcisln01@gmail.com &bull; Near SBI Bank Kurebhar Sultanpur Road
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h3>Lakshya Computer Institute</h3>
+        <p>Empowering Digital India. Providing quality education and practical training to build successful software and
+          IT careers.</p>
+        <div class="social-icons">
+          <a href="https://facebook.com/lakshyacomputer" class="social-icon" target="_blank" rel="noopener"><i
+              class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/lakshyainstitute" class="social-icon" target="_blank" rel="noopener"><i
+              class="fab fa-twitter"></i></a>
+          <a href="https://instagram.com/lakshyacomputer" class="social-icon" target="_blank" rel="noopener"><i
+              class="fab fa-instagram"></i></a>
+        </div>
       </div>
-      <div class="social-media" aria-label="Social Media Links">
-        <a href="https://facebook.com/lakshyacomputer" target="_blank" rel="noopener" aria-label="Facebook">
-          <i class="fa fa-facebook"></i>
-        </a>
-        <a href="https://twitter.com/lakshyainstitute" target="_blank" rel="noopener" aria-label="Twitter">
-          <i class="fa fa-twitter"></i>
-        </a>
-        <a href="https://instagram.com/lakshyacomputer" target="_blank" rel="noopener" aria-label="Instagram">
-          <i class="fa fa-instagram"></i>
-        </a>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Course.html">Courses</a></li>
+          <li><a href="Notebook.html">Notebooks</a></li>
+          <li><a href="admission.html">Admission</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
       </div>
+      <div class="footer-links">
+        <h4>Contact Info</h4>
+        <ul style="color: var(--text-secondary);">
+          <li style="display: flex; gap: 10px; align-items: flex-start;"><i class="fas fa-map-marker-alt"
+              style="margin-top: 4px; color: var(--accent-color);"></i> Near SBI Bank Kurebhar Sultanpur Road</li>
+          <li style="display: flex; gap: 10px; align-items: center;"><i class="fas fa-envelope"
+              style="color: var(--accent-color);"></i> lcisln01@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Lakshya Computer Institute. All Rights Reserved.
     </div>
   </footer>
 
+  <!-- Scroll to Top -->
+  <button id="scroll-top-btn" class="scroll-top" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="assets/js/main.js"></script>
   <script>
-    // Dropdown menu for course (same as all pages)
-    const dropdown = document.getElementById('courseDropdown');
-    const dropdownBtn = document.getElementById('dropdownBtn');
-    const dropdownContent = document.getElementById('dropdownContent');
-    let dropdownTimeout;
-    function openDropdown() {
-      clearTimeout(dropdownTimeout);
-      dropdown.classList.add('open');
-    }
-    function closeDropdown() {
-      dropdownTimeout = setTimeout(() => {
-        dropdown.classList.remove('open');
-      }, 250);
-    }
-    dropdownBtn.addEventListener('mouseenter', openDropdown);
-    dropdownBtn.addEventListener('mouseleave', closeDropdown);
-    dropdownContent.addEventListener('mouseenter', openDropdown);
-    dropdownContent.addEventListener('mouseleave', closeDropdown);
-    // Search box functionality
-    document.getElementById("searchForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      let query = document.getElementById("searchInput").value.trim();
-      if (query) {
-        alert("Search query: " + query);
-      } else {
-        alert("Please enter search text");
+    // Live Search Filter Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('courseSearch');
+      const cards = document.querySelectorAll('.course-card');
+      const noResultsMsg = document.getElementById('noResultsMsg');
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function (e) {
+          const query = e.target.value.toLowerCase().trim();
+          let visibleCount = 0;
+
+          cards.forEach(card => {
+            const title = card.querySelector('.card-title').textContent.toLowerCase();
+            const duration = card.querySelector('.meta-item:nth-child(1) span:last-child').textContent.toLowerCase();
+
+            if (title.includes(query) || duration.includes(query)) {
+              card.style.display = 'flex';
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          if (visibleCount === 0) {
+            noResultsMsg.style.display = 'block';
+          } else {
+            noResultsMsg.style.display = 'none';
+          }
+        });
       }
     });
   </script>
-  <!-- FontAwesome icons for social -->
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

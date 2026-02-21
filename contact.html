@@ -1,222 +1,447 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <title>Contact Us</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us - Lakshya Computer Institute</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/png" href="img/fevicon.png">
-  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --primary: #6045ea;
-      --secondary: #854fee;
-      --accent: #ee46a6;
-      --light: #f2f2f2;
-      --dark: #22223b;
-      --neutral: #d9d4e7;
-    }
-    body { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: var(--light);}
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 30px 40px 30px;}
-    header { background: var(--primary); color: #fff; width: 100%; position: sticky; top: 0; z-index: 1000;}
-    .navbar { display: flex; align-items: center; justify-content: space-between; padding: 15px 0;}
-    .nav-left { display: flex; align-items: center; gap: 20px;}
-    .logo-img { height: 38px; width: auto; filter: brightness(0) invert(1); margin-right: 10px;}
-    .nav-menu { display: flex; align-items: center; gap: 22px; position: relative; user-select: none;}
-    .nav-menu a, .dropdown-btn { color: #fff; text-decoration: none; font-weight: 500; font-size: 1.05rem; background: none; border: none; cursor: pointer; padding: 6px 10px; border-radius: 6px;}
-    .nav-menu a:hover, .dropdown-btn:hover { background: var(--accent);}
-    .dropdown { position: relative; display: inline-block; z-index: 100;}
-    .dropdown-btn { padding-right: 18px;}
-    .dropdown-content { display: none; position: absolute; top: 130%; left: 0; background: #fff; min-width: 180px; box-shadow: 0 8px 16px rgba(96, 69, 234, 0.15); z-index: 99; border-radius: 0 0 10px 10px;}
-    .dropdown-content a { color: var(--primary); background: #fff; padding: 13px 20px; text-decoration: none; display: block; font-weight: 500; border-bottom: 1px solid var(--neutral);}
-    .dropdown-content a:last-child { border-bottom: none;}
-    .dropdown-content a:hover { background: var(--neutral); color: var(--accent);}
-    .dropdown.open .dropdown-content { display: block;}
-    .nav-right { display: flex; align-items: center; gap: 20px;}
-    .btn-register {
-  display: inline-block;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 1.07rem;
-  letter-spacing: 0.02em;
-  padding: 8px 26px;
-  border-radius: 30px;
-  text-decoration: none;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  color: #fff;
-  background: linear-gradient(100deg, var(--accent), var(--secondary));
-  box-shadow: 0 4px 24px var(--accent)13;
-  transition: background 0.20s, color 0.18s, box-shadow 0.18s, transform 0.13s;
-}
-.btn-register:hover {
-  background: linear-gradient(100deg, var(--secondary), var(--accent));
-  color: #fff;
-  transform: scale(1.05) translateY(-2px);
-}
-
-    .contact-hero { background: linear-gradient(100deg, var(--secondary) 50%, var(--accent) 100%); padding: 55px 0 34px 0; text-align: center; color: #fff;}
-    .contact-hero h1 { font-size: 2.7rem; margin-top: 0; font-weight: 700; letter-spacing: 1px; text-shadow: 0 3px 10px rgba(0,0,0,0.2);}
-    .contact-wrap { display: flex; gap: 48px; margin-top: 48px; }
-    .contact-left, .contact-right { flex: 1 1 500px; min-width: 260px; border-radius: 16px; background: #fff; color: var(--dark); box-shadow: 0 0 12px var(--primary)09;}
-    .contact-left { padding: 18px 12px 18px 12px; display: flex; flex-direction: column; gap: 12px;}
-    .contact-left h2 { margin: 0 0 8px 0; color: var(--primary);}
-    .contact-left p { margin: 6px 0; font-weight: 600;}
-    .contact-left strong { font-weight: 700;}
-    .contact-right { padding: 38px 36px 32px 36px; display: flex; flex-direction: column; }
-    .contact-right h2 { color: var(--primary); font-size: 1.25rem; margin-top: 0; margin-bottom: 18px; }
-    .contact-right label { font-weight: 600; display: block; margin-bottom: 7px; color: var(--primary);}
-    .contact-right input, .contact-right textarea, .contact-right select { width: 100%; padding: 11px 13px; margin-bottom: 20px; border-radius: 8px; border: 1.5px solid var(--neutral); font-size: 1rem; font-family: 'Poppins', sans-serif;}
-    .contact-right textarea { min-height: 100px; }
-    .contact-btn { background: var(--primary); color: #fff; font-weight: 600; font-size: 1.13rem; padding: 13px 35px; border-radius: 30px; border: none; cursor: pointer; align-self: flex-start; transition: background 0.24s;}
-    .contact-btn:hover { background: var(--accent);}
-    .about-us { margin-top: 48px; text-align: center; padding: 32px 30px; background: #fff; border-radius: 14px; box-shadow: 0 0 24px var(--primary)22; color: var(--dark);}
-    .about-us h3 { font-weight: 700; color: var(--primary); font-size: 1.7rem; margin: 0 0 18px 0;}
-    .about-us p { font-size: 1.1rem; line-height: 1.68; max-width: 75ch; margin: 0 auto;}
-    @media (max-width: 900px) {
-      .container { padding: 0 10px; }
-      .contact-wrap { flex-direction: column; gap: 28px;}
-      .contact-left, .contact-right { width: 99%; min-width: 99%; }
-      .contact-right { padding: 22px 10px;}
-    }
-    footer { background: var(--primary); color: #fff; padding: 20px 15px 40px 15px; text-align: center; margin-top: 60px; border-radius: 20px 20px 0 0; font-size: 1rem; }
-    footer strong { display: block; font-size: 1.4rem; margin-bottom: 8px; }
-    footer p { margin: 0 0 12px 0;}
-    footer > div { max-width: 1100px; margin: 0 auto; }
-    footer > div > div { color: #d5cfff; font-style: italic; margin-bottom: 15px; }
-    footer .social-media { font-size: 1.6rem; display: flex; justify-content: center; gap: 32px; color: #dcd4ffcc; }
-    footer .social-media a { color: inherit; text-decoration: none; transition: color 0.3s; }
-    footer .social-media a:hover { color: var(--accent);}
-    @media (max-width: 700px) { .nav-menu, .nav-right { gap: 10px; } }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    /* Contact Specific Styles */
+    .contact-info-card {
+      background-color: var(--primary-color);
+      color: #fff;
+      border-radius: var(--border-radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-lg);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-info-card h2 {
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .contact-detail i {
+      font-size: 1.5rem;
+      color: var(--highlight-color);
+      margin-top: 4px;
+    }
+
+    .contact-detail p {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .contact-detail strong {
+      display: block;
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .map-wrapper {
+      margin-top: auto;
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      height: 250px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .map-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Form Card Styles */
+    .contact-form-card {
+      background-color: var(--surface-color);
+      border-radius: var(--border-radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      height: 100%;
+    }
+
+    .contact-form-card h2 {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    /* Floating Labels Adjustments for Select/Date */
+    .floating-group select.form-control {
+      appearance: none;
+      -webkit-appearance: none;
+      padding-top: 24px;
+      padding-bottom: 8px;
+      cursor: pointer;
+    }
+
+    .floating-group select.form-control:focus~.floating-label,
+    .floating-group select.form-control:valid~.floating-label {
+      top: 6px;
+      font-size: 0.75rem;
+      color: var(--accent-color);
+    }
+
+    .floating-group select {
+      background: var(--bg-color) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 16px center;
+    }
+
+    .about-us-card {
+      background-color: var(--surface-color);
+      border-radius: var(--border-radius-lg);
+      padding: 40px;
+      text-align: center;
+      margin-top: 40px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Success Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-normal);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .success-modal {
+      background: var(--surface-color);
+      width: 100%;
+      max-width: 450px;
+      border-radius: var(--border-radius-lg);
+      padding: 40px;
+      text-align: center;
+      transform: translateY(20px) scale(0.95);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .modal-overlay.active .success-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      background-color: rgba(16, 185, 129, 0.1);
+      color: var(--highlight-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 24px auto;
+    }
+
+    .success-modal h3 {
+      font-size: 1.8rem;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+    }
+
+    .success-modal p {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 992px) {
+      .contact-layout {
+        display: flex;
+        flex-direction: column-reverse;
+        /* Form on top for mobile */
+        gap: 40px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <!-- Page Loader -->
+  <div id="page-loader" class="page-loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Header -->
   <header>
     <div class="container navbar">
-      <div class="nav-left">
-        <img src="img/logo.png" alt="Lakshya Logo" class="logo-img" />
-        <nav class="nav-menu" id="navMenu">
-          <a href="index.html">Home</a>
-          <div class="dropdown" id="courseDropdown">
-            <button class="dropdown-btn" id="dropdownBtn">Course ▼</button>
-            <div class="dropdown-content" id="dropdownContent">
-              <a href="Course.html">Basic Course</a>
-              <a href="Course.html">Intermediate Course</a>
-              <a href="Course.html">Advance Course</a>
-            </div>
-          </div>
-          <a href="admission.html">Admission</a>
-          <a href="notebook.html">Notebook</a>
-          <a href="contact.html">Contact us</a>
-        </nav>
+      <div class="nav-brand">
+        <a href="index.html">
+          <img src="img/logo.png" alt="Lakshya Logo" class="logo-img" />
+        </a>
       </div>
-      <div class="nav-right">
-        <a href="register.html" class="btn-register">Register</a>
 
+      <nav class="nav-menu" id="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <div class="dropdown">
+          <a href="#" class="nav-link dropdown-toggle" id="dropdownBtn">Course <i class="fas fa-chevron-down"></i></a>
+          <div class="dropdown-menu">
+            <a href="Course.html" class="dropdown-item">Basic Course</a>
+            <a href="Course.html" class="dropdown-item">Intermediate Course</a>
+            <a href="Course.html" class="dropdown-item">Advance Course</a>
+          </div>
+        </div>
+        <a href="admission.html" class="nav-link">Admission</a>
+        <a href="Notebook.html" class="nav-link">Notebook</a>
+        <a href="contact.html" class="nav-link active">Contact us</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" class="btn btn-cta" style="display: flex; align-items: center; gap: 8px;"
+          aria-label="Toggle Dark Mode">
+          <i class="fas fa-moon"></i> Dark Mode
+        </button>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle Mobile Menu">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
     </div>
   </header>
 
-  <section class="contact-hero">
-    <h1>Contact Us</h1>
-  </section>
-  <main>
+  <!-- Hero Banner -->
+  <section class="hero"
+    style="padding: 60px 0; text-align: center; background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: #fff;">
     <div class="container">
-      <div class="contact-wrap">
-        <div class="contact-left">
+      <h1 style="color: #fff; margin-bottom: 0;">Contact Us</h1>
+      <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; margin-top: 16px;">We would love to hear from you. Get
+        in touch with us.</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section-padding" style="background-color: var(--bg-color);">
+    <div class="container">
+
+      <div class="grid-2 contact-layout">
+
+        <!-- Left Column: Info & Map -->
+        <div class="contact-info-card reveal">
           <h2>Our Office</h2>
-          <p><strong>Address:</strong> Lakshya Computer Institute, Kurebhar, Sultanpur, India</p>
-          <p><strong>Phone:</strong> +91 9044666636</p>
-          <p><strong>Email:</strong> info@lakshyainstitute.com</p>
-          <p><strong>Office Hours:</strong> Mon - Sat, 7:00 AM to 6:00 PM</p>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3573.3464577233767!2d82.12186277530004!3d26.412293976949005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399a70b5b1c61047%3A0x3f7963df9a05175!2sLakshya%20Computer%20Institute!5e0!3m2!1sen!2sin!4v1759248676614!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>>
+
+          <div class="contact-detail">
+            <i class="fas fa-map-marker-alt"></i>
+            <p><strong>Address:</strong> Lakshya Computer Institute, Kurebhar, Sultanpur, India</p>
+          </div>
+
+          <div class="contact-detail">
+            <i class="fas fa-phone-alt"></i>
+            <p><strong>Phone:</strong> +91 9044666636</p>
+          </div>
+
+          <div class="contact-detail">
+            <i class="fas fa-envelope"></i>
+            <p><strong>Email:</strong> info@lakshyainstitute.com</p>
+          </div>
+
+          <div class="contact-detail">
+            <i class="fas fa-clock"></i>
+            <p><strong>Office Hours:</strong> Mon - Sat, 7:00 AM to 6:00 PM</p>
+          </div>
+
+          <div class="map-wrapper mt-4">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3573.3464577233767!2d82.12186277530004!3d26.412293976949005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399a70b5b1c61047%3A0x3f7963df9a05175!2sLakshya%20Computer%20Institute!5e0!3m2!1sen!2sin!4v1759248676614!5m2!1sen!2sin"
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
         </div>
-        <div class="contact-right">
+
+        <!-- Right Column: Form -->
+        <div class="contact-form-card reveal" style="transition-delay: 0.2s;">
           <h2>Send a Message</h2>
-          <form id="contactForm" novalidate>
-            <label for="contactName">Name</label>
-            <input id="contactName" name="contactName" type="text" required placeholder="Your name" />
-            <label for="contactEmail">Email</label>
-            <input id="contactEmail" name="contactEmail" type="email" required placeholder="example@mail.com" />
-            <label for="contactSubject">Subject</label>
-            <select id="contactSubject" name="contactSubject" required>
-              <option value="" disabled selected>Select subject</option>
-              <option value="general">General Inquiry</option>
-              <option value="admission">Admission</option>
-              <option value="courses">Courses</option>
-              <option value="technical">Technical Support</option>
-              <option value="other">Other</option>
-            </select>
-            <label for="contactMsg">Message</label>
-            <textarea id="contactMsg" name="contactMsg" required placeholder="Type your message..."></textarea>
-            <button class="contact-btn" type="submit">Send Message</button>
+          <form id="contactForm" novalidate onsubmit="return false;">
+
+            <div class="floating-group">
+              <input id="contactName" name="contactName" type="text" class="form-control" required placeholder=" " />
+              <label for="contactName" class="floating-label">Your Name *</label>
+              <div class="error-message">Please enter your name.</div>
+            </div>
+
+            <div class="floating-group">
+              <input id="contactEmail" name="contactEmail" type="email" class="form-control" required placeholder=" " />
+              <label for="contactEmail" class="floating-label">Email Address *</label>
+              <div class="error-message">Please enter a valid email address.</div>
+            </div>
+
+            <div class="floating-group">
+              <select id="contactSubject" name="contactSubject" class="form-control" required>
+                <option value="" disabled selected hidden></option>
+                <option value="general">General Inquiry</option>
+                <option value="admission">Admission</option>
+                <option value="courses">Courses</option>
+                <option value="technical">Technical Support</option>
+                <option value="other">Other</option>
+              </select>
+              <label for="contactSubject" class="floating-label">Subject *</label>
+              <div class="error-message">Please select a subject.</div>
+            </div>
+
+            <div class="floating-group" style="margin-bottom: 32px;">
+              <textarea id="contactMsg" name="contactMsg" class="form-control" required placeholder=" "
+                style="min-height: 140px; padding-top: 24px;"></textarea>
+              <label for="contactMsg" class="floating-label">Message *</label>
+              <div class="error-message">Please enter your message.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px; font-size: 1.1rem;">Submit
+              Application</button>
+
           </form>
         </div>
       </div>
-      <section class="about-us">
-        <h3>About Lakshya Computer Institute</h3>
-        <p>
-          Lakshya Computer Institute is a trusted educational center offering comprehensive computer courses with practical training, designed to empower learners with essential digital skills needed in today's evolving technology landscape. Our expert instructors, modern facilities, and student-centric approach ensure a holistic learning experience.
+
+      <!-- About Us -->
+      <div class="about-us-card reveal">
+        <h3 class="section-title">About Lakshya Computer Institute</h3>
+        <p class="section-subtitle" style="max-width: 800px; margin-bottom: 0;">
+          Lakshya Computer Institute is a trusted educational center offering comprehensive computer courses with
+          practical training, designed to empower learners with essential digital skills needed in today's evolving
+          technology landscape. Our expert instructors, modern facilities, and student-centric approach ensure a
+          holistic learning experience.
         </p>
-      </section>
+      </div>
+
     </div>
-  </main>
+  </section>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="success-modal">
+      <div class="success-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <h3>Message Sent!</h3>
+      <p id="successMessageText">Thank you! Your message has been received. We will get back to you shortly.</p>
+      <button class="btn btn-primary" style="width: 100%;" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
   <footer>
-    <div>
-      <strong>Lakshya Computer Institute</strong>
-      <p>Empowering Digital India | © 2025 All Rights Reserved</p>
-      <div style="color: #d5cfff; font-style: italic; margin-bottom: 15px;">
-        Contact: lcisln01@gmail.com &bull; Near SBI Bank Kurebhar Sultanpur Road
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h3>Lakshya Computer Institute</h3>
+        <p>Empowering Digital India. Providing quality education and practical training to build successful software and
+          IT careers.</p>
+        <div class="social-icons">
+          <a href="https://facebook.com/lakshyacomputer" class="social-icon" target="_blank" rel="noopener"><i
+              class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/lakshyainstitute" class="social-icon" target="_blank" rel="noopener"><i
+              class="fab fa-twitter"></i></a>
+          <a href="https://instagram.com/lakshyacomputer" class="social-icon" target="_blank" rel="noopener"><i
+              class="fab fa-instagram"></i></a>
+        </div>
       </div>
-      <div class="social-media" aria-label="Social Media Links">
-        <a href="https://facebook.com/lakshyacomputer" target="_blank" rel="noopener" aria-label="Facebook">
-          <i class="fa fa-facebook"></i>
-        </a>
-        <a href="https://twitter.com/lakshyainstitute" target="_blank" rel="noopener" aria-label="Twitter">
-          <i class="fa fa-twitter"></i>
-        </a>
-        <a href="https://instagram.com/lakshyacomputer" target="_blank" rel="noopener" aria-label="Instagram">
-          <i class="fa fa-instagram"></i>
-        </a>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="Course.html">Courses</a></li>
+          <li><a href="Notebook.html">Notebooks</a></li>
+          <li><a href="admission.html">Admission</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
       </div>
+      <div class="footer-links">
+        <h4>Contact Info</h4>
+        <ul style="color: var(--text-secondary);">
+          <li style="display: flex; gap: 10px; align-items: flex-start;"><i class="fas fa-map-marker-alt"
+              style="margin-top: 4px; color: var(--accent-color);"></i> Near SBI Bank Kurebhar Sultanpur Road</li>
+          <li style="display: flex; gap: 10px; align-items: center;"><i class="fas fa-envelope"
+              style="color: var(--accent-color);"></i> lcisln01@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Lakshya Computer Institute. All Rights Reserved.
     </div>
   </footer>
+
+  <!-- Scroll to Top -->
+  <button id="scroll-top-btn" class="scroll-top" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+
+  <script src="assets/js/main.js"></script>
   <script>
-    const dropdown = document.getElementById('courseDropdown');
-    const dropdownBtn = document.getElementById('dropdownBtn');
-    const dropdownContent = document.getElementById('dropdownContent');
-    let dropdownTimeout;
-    function openDropdown() { clearTimeout(dropdownTimeout); dropdown.classList.add('open'); }
-    function closeDropdown() { dropdownTimeout = setTimeout(() => { dropdown.classList.remove('open'); }, 250);}
-    dropdownBtn.addEventListener('mouseenter', openDropdown);
-    dropdownBtn.addEventListener('mouseleave', closeDropdown);
-    dropdownContent.addEventListener('mouseenter', openDropdown);
-    dropdownContent.addEventListener('mouseleave', closeDropdown);
-    // Search box
-    document.getElementById("searchForm").addEventListener("submit", function (e) {
+    const form = document.getElementById('contactForm');
+    const inputs = form.querySelectorAll('.form-control');
+
+    // Remove error class on input
+    inputs.forEach(input => {
+      input.addEventListener('input', () => {
+        input.classList.remove('error');
+      });
+      input.addEventListener('change', () => {
+        input.classList.remove('error');
+      });
+    });
+
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      let query = document.getElementById("searchInput").value.trim();
-      if (query) {
-        alert("Search query: " + query);
-      } else {
-        alert("Please enter search text");
+
+      let isValid = true;
+
+      // Basic empty validation
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          input.classList.add('error');
+          isValid = false;
+        }
+      });
+
+      // Email validation
+      const email = document.getElementById('contactEmail');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (email.value.trim() && !emailRegex.test(email.value.trim())) {
+        email.classList.add('error');
+        isValid = false;
+      }
+
+      const name = document.getElementById('contactName').value.trim();
+
+      if (isValid) {
+        document.getElementById('successMessageText').innerHTML = `Thank you, <strong>${name}</strong>. Your message has been sent successfully!`;
+        document.getElementById('successModal').classList.add('active');
+        document.body.style.overflow = 'hidden'; // prevent scrolling
       }
     });
-    // Contact Form
-    document.getElementById("contactForm").addEventListener("submit", function(e){
-      e.preventDefault();
-      const name = this.contactName.value.trim();
-      const email = this.contactEmail.value.trim();
-      const subject = this.contactSubject.value;
-      const msg = this.contactMsg.value.trim();
-      if (!name || !email || !msg || !subject) { alert("Please fill all fields."); return; }
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if(!emailRegex.test(email)) { alert("Enter a valid email address."); return; }
-      alert("Thank you, " + name + ". Your message has been sent!");
-      this.reset();
-    });
+
+    function closeModal() {
+      document.getElementById('successModal').classList.remove('active');
+      document.body.style.overflow = 'auto'; // allow scrolling
+      form.reset();
+    }
   </script>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
