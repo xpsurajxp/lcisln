@@ -247,6 +247,66 @@ img {
     box-shadow: var(--shadow-lg);
 }
 
+/* Animated Theme Toggle */
+.animated-theme-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-track {
+    width: 60px;
+    height: 30px;
+    background-color: var(--border-color);
+    border-radius: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    transition: background-color var(--transition-normal);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+body[data-theme='dark'] .toggle-track {
+    background-color: var(--primary-hover);
+}
+
+.icon-sun {
+    color: #f59e0b;
+    /* Amber */
+    font-size: 14px;
+    z-index: 1;
+}
+
+.icon-moon {
+    color: #fbbf24;
+    /* Yellow */
+    font-size: 14px;
+    z-index: 1;
+}
+
+.toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+body[data-theme='dark'] .toggle-thumb {
+    transform: translateX(30px);
+    background-color: var(--primary-color);
+}
+
 .btn-outline {
     background-color: transparent;
     color: var(--text-primary);
