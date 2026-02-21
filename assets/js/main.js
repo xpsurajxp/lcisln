@@ -88,20 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Typewriter Effect
-    const typewriterElement = document.getElementById('hero-typewriter');
-    if (typewriterElement) {
-        const textToType = "Computer Institute";
-        let i = 0;
-        function typeWriter() {
-            if (i < textToType.length) {
-                typewriterElement.innerHTML += textToType.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            }
-        }
-        setTimeout(typeWriter, 400); // initial delay before typing starts
-    }
+
 
     // 6. Scroll Reveal Animation
     const revealElements = document.querySelectorAll('.reveal');
